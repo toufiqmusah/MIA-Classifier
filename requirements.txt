@@ -1,0 +1,5 @@
+# requirements.txt 
+
+SimpleITK
+monai-weekly
+-e git+https://github.com/toufiqmusah/MedNeXt.git#egg=mednextv1
