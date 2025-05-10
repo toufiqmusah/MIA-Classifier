@@ -8,7 +8,7 @@ from monai.networks.nets import EfficientNetBN, ResNet
 # MedNext Classifier Model Class
 
 class MedNextClassifier(nn.Module):
-    def __init__(self, in_channels=3, model_id='M', kernel_size=3, encoder_output=256, num_classes=2):
+    def __init__(self, in_channels=3, model_id='M', kernel_size=3, encoder_output=256, num_classes=1):
         super(MedNextClassifier, self).__init__()
 
         self.encoder = create_mednext_v1(
@@ -18,6 +18,7 @@ class MedNextClassifier(nn.Module):
             kernel_size=kernel_size,
             deep_supervision=True
         )
+        self.encoder.eval()
 
         # to freeze encoder
         for param in self.encoder.parameters():
@@ -48,15 +49,15 @@ class MedNextClassifier(nn.Module):
 # EfficientNet Model Class
 
 class EfficientNetBN3D(nn.Module):
-  def __init__(self, spatial_dims = 3, in_channels = 3, model_name: str = 'efficientnet-b4', norm = 'batch', pretained = False):
-    super(EfficientNetBN, self).__init__()
+  def __init__(self, spatial_dims = 3, in_channels = 3, model_name: str = 'efficientnet-b4', norm = 'batch', pretrained = False):
+    super(EfficientNetBN3D, self).__init__()
 
     self.model = EfficientNetBN(
         spatial_dims=spatial_dims,
         in_channels=in_channels,
         model_name=model_name,
         norm = norm,
-        pretained = pretained
+        pretrained = pretrained
     )
 
     self.linear = nn.Linear(1000, 1)

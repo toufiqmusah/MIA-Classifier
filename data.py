@@ -8,9 +8,10 @@ import SimpleITK as sitk
 
 import torch
 import torch.nn as nn
-from torch.utils.data import Dataset, DataLoader, random_split
+from torch.utils.data import Dataset, random_split
 
 import monai
+from monai.data import DataLoader
 from monai.transforms import (
     Compose,
     Invertd,
@@ -85,5 +86,5 @@ dataset = MIAClassificationDataset(root_dir = '', clinical_data = '', transform 
 seed = torch.Generator().manual_seed(42)
 train_data, validation_data = random_split(dataset, [0.90, 0.10], seed)
 
-train_loader = DataLoader(train_data, batch_size=8, shuffle=True)
+train_loader = DataLoader(train_data, batch_size=16, shuffle=True)
 validation_loader = DataLoader(validation_data, batch_size=16, shuffle=False)

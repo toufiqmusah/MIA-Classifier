@@ -1,5 +1,8 @@
 # requirements.txt 
 
+pandas
+seaborn
 SimpleITK
 monai-weekly
+scikit-learn
 -e git+https://github.com/toufiqmusah/MedNeXt.git#egg=mednextv1
